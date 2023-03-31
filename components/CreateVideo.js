@@ -26,6 +26,7 @@ const CreateVideo = () => {
   const [loading, setLoading] = useState(false);
   const [wrongFileType, setWrongFileType] = useState(false);
   const [songName, setSongName] = useState("");
+  const [productImage,setProductImage] = useState('')
   const [hashTags, setHashTags] = useState("");
   const [tagShow, setTagShow] = useState(false);
   const [tagError, setTagError] = useState("");
@@ -74,6 +75,7 @@ const CreateVideo = () => {
           profileImage: user?.photoURL,
           company: user?.email,
           timestamp: serverTimestamp(),
+          productImage:productImage,
         });
 
         if (selectedFile) {
@@ -145,6 +147,7 @@ const CreateVideo = () => {
     setTopic("");
     setHashTags("");
     setSongName("");
+    setProductImage("")
   };
 
   useEffect(() => {
@@ -289,6 +292,7 @@ const CreateVideo = () => {
               </option>
             ))}
           </select>
+          
           {tagShow && (
             <>
               <input
@@ -301,7 +305,13 @@ const CreateVideo = () => {
               {tagError && <p className="text-red-500 text-xs">{tagError}</p>}
             </>
           )}
-
+          <label className="text-md font-medium ">Product Image URL</label>
+          <input
+            type="text"
+            value={productImage}
+            onChange={(e) => setProductImage(e.target.value)}
+            className="rounded lg:after:w-650 outline-none text-md border-2 border-gray-200 p-2"
+          />
           {loading ? (
             <div className="mt-10">
               <button

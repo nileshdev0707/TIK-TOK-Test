@@ -38,6 +38,7 @@ const DetailFeed = () => {
           songName={post.data().songName}
           id={post.id}
           videoId={videoId}
+          productImage={post.data().productImage}
         />
       ))}
     </div>

@@ -15,12 +15,15 @@ import { motion } from "framer-motion";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { faker } from "@faker-js/faker";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 import {
   BsFillPlayFill,
   BsReddit,
   BsPinterest,
   BsFillChatQuoteFill,
+  BsCart4
 } from "react-icons/bs";
 import { GoVerified } from "react-icons/go";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
@@ -67,6 +70,54 @@ const dropDwonMenuItems = [
   },
 ];
 
+const userProfiles=[
+  {
+    userId:faker.datatype.uuid(),
+    username:faker.internet.userName(),
+    avtar:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1008.jpg',
+    comments:[
+      {
+        comment:'nice content',
+        userImage:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1008.jpg'
+      }
+    ]
+  },
+  {
+    userId:faker.datatype.uuid(),
+    username:faker.internet.userName(),
+    avtar:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/849.jpg',
+    comments:[
+      {
+        comment:'nice content',
+        userImage:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/849.jpg'
+      },
+      {
+        comment:'nice!',
+        userImage:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/849.jpg'
+      }
+    ]
+  },
+  {
+    userId:faker.datatype.uuid(),
+    username:faker.internet.userName(),
+    avtar:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/88.jpg',
+    comments:[
+      {
+        comment:'nice content',
+        userImage:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/88.jpg'
+      },
+      {
+        comment:'nice!',
+        userImage:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/88.jpg'
+      },
+      {
+        comment:'superb!',
+        userImage:'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/88.jpg'
+      }
+    ]
+  }
+]
+
 const VideoDetail = ({
   caption,
   company,
@@ -79,10 +130,11 @@ const VideoDetail = ({
   songName,
   id,
   videoId,
+  productImage
 }) => {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isVideoMuted, setIsVideoMuted] = useState(false);
   const [likes, setLikes] = useState([]);
   const [hasLikes, setHasLikes] = useState(false);
@@ -95,7 +147,11 @@ const VideoDetail = ({
   const [isCopied, setIsCopied] = useState(false);
   const [isOpenDrop, setIsOpenDrop] = useState(false);
 
+  const[userComments,setUserComments] = useState([]);
+  
   const videoRef = useRef(null);
+
+  const isSmallScreen = useMediaQuery(600);
 
   const onVideoClick = () => {
     if (isPlaying) {
@@ -232,6 +288,33 @@ const VideoDetail = ({
       });
   };
 
+const handleShowComments = (_id) => {
+  const filter_user_comments = userProfiles?.filter((user)=> user.userId === _id);
+  setUserComments(filter_user_comments);
+}
+
+var video1 = document.getElementById("myVideo");
+var images = document.querySelector("#myImage");
+
+video1?.addEventListener("timeupdate", function() {
+
+  if (video1.duration - video1.currentTime < 1) { // 1 second threshold
+    video1.onend();
+  }
+});
+
+if(video1){
+  video1.onend = function() {
+    // Your code to handle the end of the video goes here
+      images.style.display = "block";
+      setIsPlaying(false);
+    setTimeout(()=>{
+      images.style.display = "none";
+      onVideoClick();
+    },5000)
+  };
+}
+
   return (
     <>
       {videoId === id && (
@@ -255,10 +338,12 @@ const VideoDetail = ({
                   onClick={onVideoClick}
                   loop
                   src={video}
+                  autoPlay={true}
                   className=" h-full cursor-pointer"
+                  id="myVideo"
                 ></video>
+                <img src={productImage} id='myImage' className="absolute h-full left-0 top-0 w-full z-10" style={{display:'none'}} />
               </div>
-
               <div className="absolute top-[45%] left-[40%]  cursor-pointer">
                 {!isPlaying && (
                   <button onClick={onVideoClick}>
@@ -282,7 +367,8 @@ const VideoDetail = ({
           <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
             <div className="lg:mt-20 mt-10">
               <div
-                className="flex gap-4 mb-4 bg-white w-full pl-10 cursor-pointer"
+                className={`flex gap-4 mb-4 bg-white w-full pl-10 cursor-pointer`}
+                style={{flexFlow:`${isSmallScreen ? 'column':''}`}}
                 /*    onClick={handleChangePage} */
               >
                 <img
@@ -310,6 +396,18 @@ const VideoDetail = ({
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className="flex gap-4 mb-4 bg-white w-full pl-10 cursor-pointer">
+                {userProfiles?.map((user)=>(
+                  <>
+                    <img
+                      alt="user-profile"
+                      className="rounded-full w-12 h-12"
+                      src={user.avtar}
+                      onClick={()=>handleShowComments(user.userId)}
+                    />
+                  </>
+                ))}
               </div>
 
               <div className="px-10">
@@ -351,7 +449,7 @@ const VideoDetail = ({
               </div>
               <div className="mt-5 px-10">
                 {user && (
-                  <div className="items-center mt-8 flex justify-between gap-2 lg:gap-0">
+                  <div className={`items-center mt-8 flex justify-between gap-2 lg:gap-0 ${isSmallScreen ? 'flex-wrap' : ''}`}>
                     <div className="mb-4 flex items-center">
                       {hasLikes ? (
                         <motion.div
@@ -577,6 +675,12 @@ const VideoDetail = ({
                   )}
                 </div>
               </div>
+              <div className="flex justify-center mt-4 ">
+                  <button className='flex p-2 pl-10 pr-10 rounded-full text-white' style={{background:'#db2323'}}>
+                    Buy Now
+                    <BsCart4 className="ml-2 text-[18px] "/>
+                  </button>
+              </div>
               {isComOpem && (
                 <div className="items-center pt-4" id={id}>
                   <Comments
@@ -586,6 +690,7 @@ const VideoDetail = ({
                     comments={comments}
                     loading={loading}
                     ownShow={true}
+                    userComments={userComments}
                   />
                 </div>
               )}

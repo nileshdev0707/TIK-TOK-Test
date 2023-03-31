@@ -8,16 +8,53 @@ const Comments = ({
   comments,
   loading,
   ownShow,
+  userComments
 }) => {
   return (
     <div>
+      <div style={{minHeight:300}}>
+    {userComments.length > 0 ? (
+        <div
+          className={
+            ownShow
+              ? `overflow-y-scroll scrollbar-hide scrollbar-thumb-black bg-[#FFFAFA] py-2.5 px-2.5 border border-gray-200 border-y-gray-200`
+              : `ml-10 h-20 overflow-y-scroll scrollbar-thin scrollbar-thumb-black`
+          }
+          style={{height:300}}
+        >
+          {userComments.map((item,index) => (
+            <div key={index}>
+            {item?.comments?.map((comment,key)=>(
+              <div
+              key={item.index}
+              className="flex items-center
+            space-x-2 mb-3 ml-10"
+            >
+              <img
+                className="h-7 rounded-full"
+                src={item.avtar}
+                alt=""
+                key={key}
+              />
+                <p className="text-sm flex-1">
+                  <span className="font-bold">{item.username} </span>
+                  {comment.comment}
+                </p>
+            </div>
+            ))}
+            </div>
+          ))}
+        </div>
+    ):(
+      <>
       {comments.length > 0 && (
         <div
           className={
             ownShow
-              ? `h-48 overflow-y-scroll scrollbar-hide scrollbar-thumb-black bg-[#FFFAFA] py-2.5 px-2.5 border border-gray-200 border-y-gray-200`
+              ? `overflow-y-scroll scrollbar-hide scrollbar-thumb-black bg-[#FFFAFA] py-2.5 px-2.5 border border-gray-200 border-y-gray-200`
               : `ml-10 h-20 overflow-y-scroll scrollbar-thin scrollbar-thumb-black`
           }
+          style={{height:300}}
         >
           {comments.map((comment) => (
             <div
@@ -43,6 +80,10 @@ const Comments = ({
           ))}
         </div>
       )}
+      </>
+    )}
+  </div>
+      
       <form className="flex items-center p-4 px-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"

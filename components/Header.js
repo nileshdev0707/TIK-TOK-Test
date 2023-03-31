@@ -28,8 +28,8 @@ const Header = ({ isShow }) => {
           <img
             className="logo"
             onClick={() => router.push("/")}
-            src="https://i.postimg.cc/W1PwRj4j/logo.png"
-            alt="Tiktok"
+            src="https://res.cloudinary.com/drqknzm5v/image/upload/v1680268702/images_decx1v.png"
+            alt="Logo"
           />
         </motion.div>
 
