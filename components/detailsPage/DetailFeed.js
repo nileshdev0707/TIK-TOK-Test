@@ -15,10 +15,22 @@ const DetailFeed = () => {
       onSnapshot(
         query(collection(firestore, "posts"), orderBy("timestamp", "desc")),
         (snapshot) => {
-          setPosts(snapshot.docs);
+          if (videoId) {
+            const _posts = snapshot.docs;
+            const selectedVideo = _posts?.filter(
+              (postItem) => postItem?.id === videoId
+            );
+            const pendingVideo = _posts?.filter(
+              (postItem) => postItem?.id !== videoId
+            );
+            const filterVideo = [...selectedVideo, ...pendingVideo];
+            setPosts(filterVideo);
+          } else {
+            setPosts(snapshot.docs);
+          }
         }
       ),
-    [firestore]
+    [firestore, videoId]
   );
   /*   console.log(posts); */
 
