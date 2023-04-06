@@ -30,16 +30,23 @@ const DetailFeed = () => {
     [firestore, videoId]
   );
 
+  const debounce = function(fn, d) {
+    let timer;
+    return function() {
+      let context = this;
+      let args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+      }, d);
+    }
+  }
+
   useEffect(() => {
 
     if (videoIdIndex == -1) return
     setPost(postList[videoIdIndex])
-    window.addEventListener("wheel", (event) => {
-      // clearTimeout(timeOut)
-      // timeOut = null;
-      // timeOut = setTimeout(() => {
-
-      // }, 1000)
+    window.addEventListener("wheel", debounce((event)=> {
       if (event.deltaY < 0) {
         if (videoIdIndex) {
           setVideoIdIndex(videoIdIndex - 1)
@@ -50,8 +57,7 @@ const DetailFeed = () => {
           setVideoIdIndex(videoIdIndex + 1)
         }
       }
-
-    });
+    }, 300));
   }, [videoIdIndex])
 
 
