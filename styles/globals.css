@@ -97,6 +97,9 @@ body {
   font-weight: 600;
 }
 
+:disabled {
+  cursor: not-allowed;
+}
 .upload-btn:hover {
   text-decoration: underline;
   cursor: pointer;

@@ -5,10 +5,13 @@ import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase";
 import VideoDetail from "./VideoDetail";
 
+let postList = []
+let timeOut;
 const DetailFeed = () => {
   const router = useRouter();
   const { videoId } = router.query;
-  const [posts, setPosts] = useState([]);
+  const [videoIdIndex, setVideoIdIndex] = useState(-1);
+  const [post, setPost] = useState('');
 
   useEffect(
     () =>
@@ -16,43 +19,64 @@ const DetailFeed = () => {
         query(collection(firestore, "posts"), orderBy("timestamp", "desc")),
         (snapshot) => {
           if (videoId) {
-            const _posts = snapshot.docs;
-            const selectedVideo = _posts?.filter(
+            postList = snapshot.docs;
+            const pendingVideo = postList?.findIndex(
               (postItem) => postItem?.id === videoId
             );
-            const pendingVideo = _posts?.filter(
-              (postItem) => postItem?.id !== videoId
-            );
-            const filterVideo = [...selectedVideo, ...pendingVideo];
-            setPosts(filterVideo);
-          } else {
-            setPosts(snapshot.docs);
+            setVideoIdIndex(pendingVideo);
           }
         }
       ),
     [firestore, videoId]
   );
-  /*   console.log(posts); */
+
+  useEffect(() => {
+
+    if (videoIdIndex == -1) return
+    setPost(postList[videoIdIndex])
+    window.addEventListener("wheel", (event) => {
+      // clearTimeout(timeOut)
+      // timeOut = null;
+      // timeOut = setTimeout(() => {
+
+      // }, 1000)
+      if (event.deltaY < 0) {
+        if (videoIdIndex) {
+          setVideoIdIndex(videoIdIndex - 1)
+        }
+      }
+      else if (event.deltaY > 0) {
+        if (videoIdIndex !== postList?.length - 1) {
+          setVideoIdIndex(videoIdIndex + 1)
+        }
+      }
+
+    });
+  }, [videoIdIndex])
+
+
+
+  if (!post) return <div></div>
 
   return (
     <div>
-      {posts.map((post) => (
-        <VideoDetail
-          key={post.id}
-          caption={post.data().caption}
-          company={post.data().company}
-          video={post.data().image}
-          profileImage={post.data().profileImage}
-          topic={post.data().topic}
-          timestamp={post.data().timestamp}
-          username={post.data().username}
-          userId={post.data().userId}
-          songName={post.data().songName}
-          id={post.id}
-          videoId={videoId}
-          productImage={post.data().productImage}
-        />
-      ))}
+      <VideoDetail
+        caption={post.data().caption}
+        company={post.data().company}
+        video={post.data().image}
+        profileImage={post.data().profileImage}
+        topic={post.data().topic}
+        timestamp={post.data().timestamp}
+        username={post.data().username}
+        userId={post.data().userId}
+        songName={post.data().songName}
+        id={post.id}
+        videoId={videoId}
+        productImage={post.data().productImage}
+        setVideoIdIndex={setVideoIdIndex}
+        videoIdIndex={videoIdIndex}
+        postList={postList}
+      />
     </div>
   );
 };

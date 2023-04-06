@@ -25,6 +25,7 @@ import {
   BsFillChatQuoteFill,
   BsCart4
 } from "react-icons/bs";
+import { IoIosArrowDropdown, IoIosArrowDropup } from "react-icons/io";
 import { GoVerified } from "react-icons/go";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
 import { IoIosShareAlt } from "react-icons/io";
@@ -130,12 +131,15 @@ const VideoDetail = ({
   songName,
   id,
   videoId,
-  productImage
+  productImage,
+  setVideoIdIndex,
+  videoIdIndex,
+  postList
 }) => {
   const [user] = useAuthState(auth);
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isVideoMuted, setIsVideoMuted] = useState(false);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
   const [likes, setLikes] = useState([]);
   const [hasLikes, setHasLikes] = useState(false);
   const [comment, setComment] = useState("");
@@ -150,8 +154,14 @@ const VideoDetail = ({
   const [userComments, setUserComments] = useState([]);
 
   const videoRef = useRef(null);
-
   const isSmallScreen = useMediaQuery(600);
+
+  const handleNextClick = () => {
+    setVideoIdIndex(videoIdIndex + 1);
+  };
+  const handlePreviousClick = () => {
+    setVideoIdIndex(videoIdIndex - 1);
+  };
 
   const onVideoClick = () => {
     if (isPlaying) {
@@ -321,8 +331,7 @@ const VideoDetail = ({
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        // className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap"
-        className="flex w-full bg-white flex-wrap lg:flex-nowrap"
+        className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap"
       >
         <Toaster />
         <div className="relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center bg-gradient-to-r from-gray-900 to-gray-700">
@@ -339,6 +348,7 @@ const VideoDetail = ({
                 loop
                 src={video}
                 autoPlay={true}
+                muted={true}
                 className=" h-full cursor-pointer"
                 id="myVideo"
               ></video>
@@ -351,6 +361,17 @@ const VideoDetail = ({
                 </button>
               )}
             </div>
+
+          </div>
+          <div className="absolute top-[43%] right-[0%]">
+            <button disabled={videoIdIndex === 0} onClick={handlePreviousClick}>
+              <IoIosArrowDropup className="text-white text-6xl " />
+            </button>
+          </div>
+          <div className="absolute top-[50%] right-[0%]">
+            <button disabled={videoIdIndex === postList?.length - 1} onClick={handleNextClick}>
+              <IoIosArrowDropdown className="text-white text-6xl" />
+            </button>
           </div>
           <div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10  cursor-pointer">
             {isVideoMuted ? (
