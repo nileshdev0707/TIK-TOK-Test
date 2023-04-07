@@ -30,34 +30,38 @@ const DetailFeed = () => {
     [firestore, videoId]
   );
 
-  const debounce = function(fn, d) {
-    let timer;
-    return function() {
-      let context = this;
-      let args = arguments;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn.apply(context, args);
-      }, d);
-    }
-  }
+  // const debounce = function (fn, d) {
+  //   let timer;
+  //   return function () {
+  //     let context = this;
+  //     let args = arguments;
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       fn.apply(context, args);
+  //     }, d);
+  //   }
+  // }
 
   useEffect(() => {
-
     if (videoIdIndex == -1) return
     setPost(postList[videoIdIndex])
-    window.addEventListener("wheel", debounce((event)=> {
-      if (event.deltaY < 0) {
-        if (videoIdIndex) {
-          setVideoIdIndex(videoIdIndex - 1)
+
+    clearTimeout(timeOut)
+    timeOut = null;
+    timeOut = setTimeout(() => {
+      window.addEventListener("wheel", (event) => {
+        if (event.deltaY < 0) {
+          if (videoIdIndex) {
+            setVideoIdIndex(videoIdIndex - 1)
+          }
         }
-      }
-      else if (event.deltaY > 0) {
-        if (videoIdIndex !== postList?.length - 1) {
-          setVideoIdIndex(videoIdIndex + 1)
+        else if (event.deltaY > 0) {
+          if (videoIdIndex !== postList?.length - 1) {
+            setVideoIdIndex(videoIdIndex + 1)
+          }
         }
-      }
-    }, 300));
+      });
+    }, 500);
   }, [videoIdIndex])
 
 
