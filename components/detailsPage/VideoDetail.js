@@ -156,6 +156,9 @@ const VideoDetail = ({
   const videoRef = useRef(null);
   const isSmallScreen = useMediaQuery(600);
 
+  useEffect(() => {
+    setIsPlaying(true);
+  }, [videoIdIndex])
   const handleNextClick = () => {
     setVideoIdIndex(videoIdIndex + 1);
   };
@@ -303,8 +306,8 @@ const VideoDetail = ({
     setUserComments(filter_user_comments);
   }
 
-  var video1 = document.getElementById("myVideo");
-  var images = document.querySelector("#myImage");
+  let video1 = document.getElementById("myVideo");
+  let images = document.querySelector("#myImage");
 
   video1?.addEventListener("timeupdate", function () {
 
