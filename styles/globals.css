@@ -106,6 +106,40 @@ body {
   cursor: pointer;
 }
 
+.video:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-100px);
+  background: linear-gradient(90deg, transparent, #303c4f, transparent);
+  animation: loading 1s infinite;
+}
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* .video {
+  background: linear-gradient(
+    90deg,
+    #252e3d 30%,
+    #303c4f 38%,
+    #303c4f 40%,
+    #252e3d 48%
+  );
+  background-size: 200%, 100%;
+  animation: load 1s infinite;
+}
+@keyframes load {
+  0% {
+    background-position: 100% 0;
+  }
+} */
+
 .login-btn {
   height: 2.3rem;
   width: 6rem;

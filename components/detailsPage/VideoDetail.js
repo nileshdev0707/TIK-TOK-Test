@@ -150,6 +150,7 @@ const VideoDetail = ({
   const [videoLink, setVideoLink] = useState();
   const [isCopied, setIsCopied] = useState(false);
   const [isOpenDrop, setIsOpenDrop] = useState(false);
+  const [isLoadVideo, setIsLoadVideo] = useState(true);
 
   const [userComments, setUserComments] = useState([]);
 
@@ -337,14 +338,14 @@ const VideoDetail = ({
         className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap"
       >
         <Toaster />
-        <div className="relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center bg-gradient-to-r from-gray-900 to-gray-700">
+        <div className="overflow-hidden relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center bg-gradient-to-r from-gray-900 to-gray-700">
           <div className="opacity-90 absolute top-6 left-2 lg:left-6 flex gap-6 z-50">
             <p className="cursor-pointer " onClick={() => router.back()}>
               <MdOutlineCancel className="text-white text-[35px] hover:opacity-90" />
             </p>
           </div>
           <div className="relative">
-            <div className="lg:h-[100vh] h-[60vh]">
+            <div className={`lg:h-[100vh] h-[60vh] ${isLoadVideo && "video"} `}>
               <video
                 ref={videoRef}
                 onClick={onVideoClick}
@@ -352,9 +353,16 @@ const VideoDetail = ({
                 src={video}
                 autoPlay={true}
                 muted={true}
-                className=" h-full cursor-pointer"
+                className="h-full cursor-pointer"
                 id="myVideo"
-              ></video>
+                onLoadStart={() => {
+                  setIsLoadVideo(true);
+                }}
+                onLoadedData={() => {
+                  setIsLoadVideo(false);
+                }}
+              >
+              </video>
               <img src={productImage} id='myImage' className="absolute h-full left-0 top-0 w-full z-10" style={{ display: 'none' }} />
             </div>
             <div className="absolute top-[45%] left-[40%]  cursor-pointer">
@@ -366,7 +374,7 @@ const VideoDetail = ({
             </div>
 
           </div>
-          <div className="absolute top-[43%] right-[0%]">
+          <div className="absolute top-[38%] lg:top-[43%] right-[0%]">
             <button disabled={videoIdIndex === 0} onClick={handlePreviousClick}>
               <IoIosArrowDropup className="text-white text-6xl " />
             </button>
