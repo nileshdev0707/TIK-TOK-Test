@@ -61,7 +61,8 @@ const DetailFeed = () => {
     clearTimeout(timeOut)
     timeOut = null;
     timeOut = setTimeout(() => {
-      window.addEventListener("wheel", (event) => {
+      const videotag = document.getElementById('myVideo');
+      videotag.addEventListener("wheel", (event) => {
         if (event.deltaY < 0) {
           if (videoIdIndex) {
             setVideoIdIndex(videoIdIndex - 1)
