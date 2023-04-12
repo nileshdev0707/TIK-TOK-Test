@@ -158,16 +158,17 @@ const Post = ({
   }, [topic]);
 
   const handleChangeDetailsPage = () => {
-    if (user) {
+    // if (user) {
       router.push({
         pathname: `detail/${id}`,
         query: {
           videoId: id,
         },
       });
-    } else {
-      router.push("/auth/signin");
-    }
+    // }
+    // } else {
+    //   router.push("/auth/signin");
+    // }
   };
 
   return (

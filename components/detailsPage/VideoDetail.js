@@ -161,10 +161,18 @@ const VideoDetail = ({
     setIsPlaying(true);
   }, [videoIdIndex])
   const handleNextClick = () => {
-    setVideoIdIndex(videoIdIndex + 1);
+    if(videoIdIndex === postList?.length - 1){
+      setVideoIdIndex(1)
+    }else{
+      setVideoIdIndex(videoIdIndex + 1);
+    }
   };
   const handlePreviousClick = () => {
-    setVideoIdIndex(videoIdIndex - 1);
+    if(videoIdIndex === 0) {
+      setVideoIdIndex(postList?.length - 1)
+    }else{
+      setVideoIdIndex(videoIdIndex - 1);
+    }
   };
 
   const onVideoClick = () => {
@@ -375,12 +383,12 @@ const VideoDetail = ({
 
           </div>
           <div className="absolute top-[38%] lg:top-[43%] right-[0%]">
-            <button disabled={videoIdIndex === 0} onClick={handlePreviousClick}>
+            <button onClick={handlePreviousClick}>
               <IoIosArrowDropup className="text-white text-6xl " />
             </button>
           </div>
           <div className="absolute top-[50%] right-[0%]">
-            <button disabled={videoIdIndex === postList?.length - 1} onClick={handleNextClick}>
+            <button onClick={handleNextClick}>
               <IoIosArrowDropdown className="text-white text-6xl" />
             </button>
           </div>

@@ -4,31 +4,34 @@ import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
 
 import { firestore } from "../../firebase/firebase";
 import VideoDetail from "./VideoDetail";
+import { postList } from '../mockData';
 
-let postList = []
+console.log(postList,'postList')
+
+// let postList = []
 let timeOut;
 const DetailFeed = () => {
   const router = useRouter();
   const { videoId } = router.query;
-  const [videoIdIndex, setVideoIdIndex] = useState(-1);
+
   const [post, setPost] = useState('');
 
-  useEffect(
-    () =>
-      onSnapshot(
-        query(collection(firestore, "posts"), orderBy("timestamp", "desc")),
-        (snapshot) => {
-          if (videoId) {
-            postList = snapshot.docs;
-            const pendingVideo = postList?.findIndex(
-              (postItem) => postItem?.id === videoId
-            );
-            setVideoIdIndex(pendingVideo);
-          }
-        }
-      ),
-    [firestore, videoId]
-  );
+  // useEffect(
+  //   () =>
+  //     onSnapshot(
+  //       query(collection(firestore, "posts"), orderBy("timestamp", "desc")),
+  //       (snapshot) => {
+  //         if (videoId) {
+  //           postList = snapshot.docs;
+  //           const pendingVideo = postList?.findIndex(
+  //             (postItem) => postItem?.id === videoId
+  //           );
+  //           setVideoIdIndex(pendingVideo);
+  //         }
+  //       }
+  //     ),
+  //   [firestore, videoId]
+  // );
 
   // const debounce = function (fn, d) {
   //   let timer;
@@ -41,6 +44,15 @@ const DetailFeed = () => {
   //     }, d);
   //   }
   // }
+
+
+  const [videoIdIndex, setVideoIdIndex] = useState(-1);
+
+
+  useEffect(()=>{
+    const pendingVideo = postList?.findIndex((postItem) => postItem?.id === videoId);
+    setVideoIdIndex(pendingVideo);
+  },[])
 
   useEffect(() => {
     if (videoIdIndex == -1) return
@@ -58,6 +70,8 @@ const DetailFeed = () => {
         else if (event.deltaY > 0) {
           if (videoIdIndex !== postList?.length - 1) {
             setVideoIdIndex(videoIdIndex + 1)
+          }else{
+            setVideoIdIndex(1);
           }
         }
       });
@@ -71,18 +85,30 @@ const DetailFeed = () => {
   return (
     <div>
       <VideoDetail
-        caption={post.data().caption}
-        company={post.data().company}
-        video={post.data().image}
-        profileImage={post.data().profileImage}
-        topic={post.data().topic}
-        timestamp={post.data().timestamp}
-        username={post.data().username}
-        userId={post.data().userId}
-        songName={post.data().songName}
+        // caption={post.data().caption}
+        // company={post.data().company}
+        // video={post.data().image}
+        // profileImage={post.data().profileImage}
+        // topic={post.data().topic}
+        // timestamp={post.data().timestamp}
+        // username={post.data().username}
+        // userId={post.data().userId}
+        // songName={post.data().songName}
+        // id={post.id}
+        // videoId={videoId}
+        // productImage={post.data().productImage}
+        caption={post.caption}
+        company={post.company}
+        video={post.image}
+        profileImage={post.profileImage}
+        topic={post.topic}
+        timestamp={post.timestamp}
+        username={post.username}
+        userId={post.userId}
+        songName={post.songName}
         id={post.id}
         videoId={videoId}
-        productImage={post.data().productImage}
+        productImage={post.productImage}
         setVideoIdIndex={setVideoIdIndex}
         videoIdIndex={videoIdIndex}
         postList={postList}

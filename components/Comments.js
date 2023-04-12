@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import moment from "moment";
-
+import randomWords from "random-words";
+import { faker } from "@faker-js/faker";
+let comment_video = [];
 const Comments = ({
   comment,
   setComment,
@@ -10,6 +12,36 @@ const Comments = ({
   ownShow,
   userComments
 }) => {
+const [videoComment,setVideoComment] = useState([]);
+
+  useEffect(()=>{
+
+    comment_video = []
+    console.log(comments,'comments--->>')
+    let allComments=[];
+    comments.map((comment) => {
+      let singleComment = {
+        userImage:'https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg',
+        comment:comment.data().comment,
+        userName:comment.data().username,
+      }
+      comment_video.push(singleComment)
+      allComments.push(singleComment);
+    })
+    setVideoComment(allComments);  
+
+    setInterval(()=>{
+      let newComment ={ 
+        userImage:faker.image.avatar(),
+        comment:randomWords({ exactly: 3, join: ' ' }),
+        userName: faker.internet.userName(),
+      }
+      comment_video.push(newComment);
+      setVideoComment(comment_video);
+    },3000)
+  },[comments])
+
+
   return (
     <div>
       <div style={{minHeight:300}}>
@@ -47,7 +79,7 @@ const Comments = ({
         </div>
     ):(
       <>
-      {comments.length > 0 && (
+      {videoComment.length > 0 && (
         <div
           className={
             ownShow
@@ -56,7 +88,7 @@ const Comments = ({
           }
           style={{height:300}}
         >
-          {comments.map((comment) => (
+          {videoComment.map((comment) => (
             <div
               key={comment.id}
               className="flex items-center
@@ -64,17 +96,12 @@ const Comments = ({
             >
               <img
                 className="h-7 rounded-full"
-                src={comment.data().userImage}
+                src={comment.userImage}
                 alt=""
               />
               <p className="text-sm flex-1">
-                <span className="font-bold">{comment.data().username} </span>
-                {comment.data().comment}
-              </p>
-              <p className={ownShow ? `pl-10 text-xs` : `pr-5 text-xs`}>
-                {moment(
-                  new Date(comment.data().timestamp?.seconds * 1000)
-                ).fromNow()}
+                <span className="font-bold">{comment.userName} </span>
+                {comment.comment}
               </p>
             </div>
           ))}

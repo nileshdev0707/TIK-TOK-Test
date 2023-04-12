@@ -68,7 +68,7 @@ const Header = ({ isShow }) => {
           viewport={{ once: true }}
           className="nav-right"
         >
-          {isShow && (
+          {/* {isShow && (
             <>
               {user && (
                 <button
@@ -94,7 +94,7 @@ const Header = ({ isShow }) => {
                 </button>
               )}
             </>
-          )}
+          )} */}
           {/* <button
             className="upload-btn flex items-center"
             onClick={() => router.push("/pin/create")}
@@ -115,14 +115,14 @@ const Header = ({ isShow }) => {
             </svg>
             Upload
           </button> */}
-          {user ? (
+          {/* {user ? (
             <div className="flex items-center">
               <img
                 src={user?.photoURL}
                 className="rounded-full w-10 cursor-pointer"
                 alt="Avatar"
               />
-              {/*   <p>{user?.displayName}</p> */}
+                 <p>{user?.displayName}</p> // remove display name when it will comment out
             </div>
           ) : (
             <button
@@ -131,8 +131,8 @@ const Header = ({ isShow }) => {
             >
               Log in
             </button>
-          )}
-          <div className="drop-down">
+          )} */}
+          {/* <div className="drop-down">
             {dropMenu ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -268,7 +268,7 @@ const Header = ({ isShow }) => {
                 </ul>
               </motion.div>
             )}
-          </div>
+          </div> */}
         </motion.div>
       </nav>
     </header>

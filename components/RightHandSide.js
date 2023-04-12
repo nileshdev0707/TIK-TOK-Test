@@ -3,6 +3,7 @@ import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
 
 import { firestore } from "../firebase/firebase";
 import Post from "./Post";
+import { postList } from './mockData';
 
 import Skeleton from "./Skeleton/Skeleton";
 
@@ -33,7 +34,7 @@ const RightHandSide = () => {
     <div className="right mt-4">
       {isShow ? (
         <>
-          {posts.map((post) => (
+          {/* {posts.map((post) => (
             <Post
               key={post.id}
               caption={post.data().caption}
@@ -45,6 +46,22 @@ const RightHandSide = () => {
               username={post.data().username}
               userId={post.data().userId}
               songName={post.data().songName}
+              id={post.id}
+            />
+          ))} */}
+
+          {postList.map((post) => (
+            <Post
+              key={post.id}
+              caption={post.caption}
+              company={post.company}
+              video={post.image}
+              profileImage={post.profileImage}
+              topic={post.topic}
+              timestamp={post.timestamp}
+              username={post.username}
+              userId={post.userId}
+              songName={post.songName}
               id={post.id}
             />
           ))}
