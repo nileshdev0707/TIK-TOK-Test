@@ -9,6 +9,7 @@ import {useMediaQuery} from "../../hooks/useMediaQuery";
 
 console.log(postList,'postList')
 let functioncalled = true
+let _videoIdIndex = 0
 // let postList = []
 let timeOut;
 const DetailFeed = () => {
@@ -60,31 +61,32 @@ const DetailFeed = () => {
   },[postList, videoId])
 
   useEffect(() => {
-    if (videoIdIndex == -1) return
+    if (_videoIdIndex == -1) return
     setPost(postList[videoIdIndex])
   }, [videoIdIndex])
 
   useEffect(() => {
     if(post && functioncalled) {
       functioncalled = false
-      clearTimeout(timeOut)
-      timeOut = null;
       if(!isSmallScreen) {
+        clearTimeout(timeOut)
+        timeOut = null;
         timeOut = setTimeout(() => {
           const videotag = document.getElementById('myVideo-container');
           videotag.addEventListener("wheel", (event) => {
             if (event.deltaY < 0) {
-              if (videoIdIndex) {
-                setVideoIdIndex(videoIdIndex - 1)
+              if (_videoIdIndex) {
+                _videoIdIndex = _videoIdIndex - 1
               }
             }
             else if (event.deltaY > 0) {
-              if (videoIdIndex !== postList?.length - 1) {
-                setVideoIdIndex(videoIdIndex + 1)
-              }else{
-                setVideoIdIndex(1);
+              if (_videoIdIndex !== postList?.length - 1) {
+                _videoIdIndex = _videoIdIndex + 1;
+              } else{
+                _videoIdIndex = 1;
               }
             }
+            setVideoIdIndex(_videoIdIndex)
           });
         }, 500);
       } else {
@@ -111,19 +113,19 @@ const DetailFeed = () => {
                 // User swiped downward
                 console.log('Downward swipe detected!');
 
-                if (videoIdIndex !== postList?.length - 1) {
-                  setVideoIdIndex(videoIdIndex + 1)
+                if (_videoIdIndex !== postList?.length - 1) {
+                  _videoIdIndex = _videoIdIndex + 1
                 } else {
-                  setVideoIdIndex(1);
+                  _videoIdIndex = 1
                 }
               } else if (deltaY < 0) {
                 // User swiped upward
                 console.log('Upward swipe detected!');
-                if (videoIdIndex) {
-                  setVideoIdIndex(videoIdIndex - 1)
+                if (_videoIdIndex) {
+                  _videoIdIndex = _videoIdIndex - 1
                 }
               }
-
+              setVideoIdIndex(_videoIdIndex)
               // Reset the initial touch position
               startY = null;
             }
@@ -134,7 +136,7 @@ const DetailFeed = () => {
   }, [post])
 
 
-
+console.log({videoIdIndex})
   if (!post) return <div></div>
 
   return (
