@@ -83,41 +83,43 @@ const DetailFeed = () => {
     } else {
       // Attach the touch event handlers to your element
       const myElement = document.getElementById('myVideo');
-      myElement.addEventListener('touchstart', handleTouchStart);
-      myElement.addEventListener('touchend', handleTouchEnd);
-      let startY = null;
+      if(myElement) {
+        myElement.addEventListener('touchstart', handleTouchStart);
+        myElement.addEventListener('touchend', handleTouchEnd);
+        let startY = null;
 
-      function handleTouchStart(event) {
-        // Store the initial touch position
-        const touch = event.touches[0];
-        startY = touch.clientY;
-      }
+        function handleTouchStart(event) {
+          // Store the initial touch position
+          const touch = event.touches[0];
+          startY = touch.clientY;
+        }
 
-      function handleTouchEnd(event) {
-        if (startY !== null) {
-          // Calculate the distance between the initial and final touch positions
-          const touch = event.changedTouches[0];
-          const deltaY = touch.clientY - startY;
+        function handleTouchEnd(event) {
+          if (startY !== null) {
+            // Calculate the distance between the initial and final touch positions
+            const touch = event.changedTouches[0];
+            const deltaY = touch.clientY - startY;
 
-          if (deltaY > 0) {
-            // User swiped downward
-            console.log('Downward swipe detected!');
+            if (deltaY > 0) {
+              // User swiped downward
+              console.log('Downward swipe detected!');
 
-            if (videoIdIndex !== postList?.length - 1) {
-              setVideoIdIndex(videoIdIndex + 1)
-            }else{
-              setVideoIdIndex(1);
+              if (videoIdIndex !== postList?.length - 1) {
+                setVideoIdIndex(videoIdIndex + 1)
+              } else {
+                setVideoIdIndex(1);
+              }
+            } else if (deltaY < 0) {
+              // User swiped upward
+              console.log('Upward swipe detected!');
+              if (videoIdIndex) {
+                setVideoIdIndex(videoIdIndex - 1)
+              }
             }
-          } else if (deltaY < 0) {
-            // User swiped upward
-            console.log('Upward swipe detected!');
-            if (videoIdIndex) {
-              setVideoIdIndex(videoIdIndex - 1)
-            }
+
+            // Reset the initial touch position
+            startY = null;
           }
-
-          // Reset the initial touch position
-          startY = null;
         }
       }
     }
