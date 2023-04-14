@@ -368,6 +368,7 @@ const VideoDetail = ({
                 onLoadedData={() => {
                   setIsLoadVideo(false);
                 }}
+                playsinline
               >
               </video>
               <img src={productImage} id='myImage' className="absolute h-full left-0 top-0 w-full z-10" style={{ display: 'none' }} />

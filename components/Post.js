@@ -280,6 +280,7 @@ const Post = ({
                 ref={videoRef}
                 src={video}
                 className="lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] rounded-2xl cursor-pointer bg-gray-100"
+                playsinline
               ></video>
             </div>
 
