@@ -96,6 +96,7 @@ const Post = ({
   useEffect(() => {
     if (videoRef?.current) {
       videoRef.current.muted = isVideoMuted;
+      videoRef.current.currentTime = 1;
     }
   }, [isVideoMuted]);
 
