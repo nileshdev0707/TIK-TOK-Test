@@ -62,7 +62,7 @@ const DetailFeed = () => {
 
     clearTimeout(timeOut)
     timeOut = null;
-    if(isSmallScreen) {
+    if(!isSmallScreen) {
       timeOut = setTimeout(() => {
         const videotag = document.getElementById('myVideo');
         videotag.addEventListener("wheel", (event) => {
