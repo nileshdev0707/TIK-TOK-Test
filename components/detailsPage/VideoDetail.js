@@ -283,6 +283,29 @@ const VideoDetail = ({
       const chekerUrl = video.replace("mega.nz/embed", "tiktokClone.com");
       setVideoLink(chekerUrl);
     }
+    if(video) {
+      let video1 = document.getElementById("myVideo");
+      let images = document.querySelector("#myImage");
+
+      video1?.addEventListener("timeupdate", function () {
+
+        if (video1.duration - video1.currentTime < 1) { // 1 second threshold
+          video1.onend();
+        }
+      });
+
+      if (video1) {
+        video1.onend = function () {
+          // Your code to handle the end of the video goes here
+          images.style.display = "block";
+          setIsPlaying(false);
+          setTimeout(() => {
+            images.style.display = "none";
+            onVideoClick();
+          }, 5000)
+        };
+      }
+    }
   }, [video]);
 
   // This is the function we wrote earlier
@@ -315,34 +338,13 @@ const VideoDetail = ({
     setUserComments(filter_user_comments);
   }
 
-  let video1 = document.getElementById("myVideo");
-  let images = document.querySelector("#myImage");
-
-  video1?.addEventListener("timeupdate", function () {
-
-    if (video1.duration - video1.currentTime < 1) { // 1 second threshold
-      video1.onend();
-    }
-  });
-
-  if (video1) {
-    video1.onend = function () {
-      // Your code to handle the end of the video goes here
-      images.style.display = "block";
-      setIsPlaying(false);
-      setTimeout(() => {
-        images.style.display = "none";
-        onVideoClick();
-      }, 5000)
-    };
-  }
-
   return (
     <>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
+        id="myVideo-container"
         className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap"
       >
         <Toaster />
@@ -358,6 +360,7 @@ const VideoDetail = ({
                 ref={videoRef}
                 onClick={onVideoClick}
                 loop
+                id="myVideo"
                 src={video}
                 autoPlay={true}
                 muted={true}
@@ -406,7 +409,7 @@ const VideoDetail = ({
         </div>
         <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
           <div className="lg:mt-20 mt-10">
-            <div id="myVideo">
+            <>
               <div
                 className={`flex gap-4 mb-4 bg-white w-full pl-10 cursor-pointer items-center`}
                 style={{ flexFlow: `${isSmallScreen ? 'row' : ''}` }}
@@ -722,7 +725,7 @@ const VideoDetail = ({
                   <BsCart4 className="ml-2 text-[18px] " />
                 </button>
               </div>
-            </div>
+            </>
             {isComOpem && (
               <div className="items-center pt-4" id={id}>
                 <Comments
