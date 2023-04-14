@@ -23,6 +23,7 @@ import { IoIosShareAlt } from "react-icons/io";
 
 import { auth, firestore } from "../firebase/firebase";
 import Comments from "./Comments";
+import {useMediaQuery} from "../hooks/useMediaQuery";
 
 const Post = ({
   caption,
@@ -49,7 +50,7 @@ const Post = ({
   const [isComOpem, setIsComOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tagCheck, setIsTagCheck] = useState();
-
+  const isSmallScreen = useMediaQuery(600);
   const onVideoPress = () => {
     if (playing) {
       videoRef?.current?.pause();
@@ -194,18 +195,19 @@ const Post = ({
               />
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className=" items-center gap-2">
                 <p className="flex gap-2 items-center md:text-md font-bold text-primary">
                   {username}
                   <GoVerified className="text-blue-400 text-md" />
                 </p>
-                <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
+                <p className="capitalize font-medium text-xs text-gray-500  md:block">
                   {company}
                 </p>
                 <div className="flex ml-56">
                   <button
                     type="button"
                     className="inline-block px-4 py-1.5 border border-pink-500 text-pink-500 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                    style={{marginTop: "-30px"} }
                   >
                     Follow
                   </button>
@@ -213,7 +215,7 @@ const Post = ({
               </div>
 
               {caption.length > 70 ? (
-                <p className="mt-2 font-normal">
+                <p className="mt-0 font-normal">
                   {caption.slice(0, 100)}
                   {"..."}
                 </p>
@@ -269,7 +271,7 @@ const Post = ({
           <div
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className="rounded-3xl"
+            className={`rounded-3xl ${isSmallScreen && 'mx-auto'}`}
           >
             <div onClick={handleChangeDetailsPage}>
               <video
@@ -277,7 +279,7 @@ const Post = ({
                 controls={false}
                 ref={videoRef}
                 src={video}
-                className="lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
+                className="lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] rounded-2xl cursor-pointer bg-gray-100"
               ></video>
             </div>
 

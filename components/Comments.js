@@ -48,7 +48,7 @@ const [videoComment,setVideoComment] = useState([]);
     {userComments.length > 0 ? (
         <div
           className={
-            ownShow
+            !ownShow
               ? `overflow-y-scroll scrollbar-hide scrollbar-thumb-black bg-[#FFFAFA] py-2.5 px-2.5 border border-gray-200 border-y-gray-200`
               : `ml-10 h-20 overflow-y-scroll scrollbar-thin scrollbar-thumb-black`
           }

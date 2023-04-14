@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
+// import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
 
-import { firestore } from "../../firebase/firebase";
+// import { firestore } from "../../firebase/firebase";
 import VideoDetail from "./VideoDetail";
 import { postList } from '../mockData';
 
