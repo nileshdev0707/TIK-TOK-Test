@@ -66,13 +66,13 @@ const DetailFeed = () => {
   }, [videoIdIndex])
 
   useEffect(() => {
-    if(post && functioncalled) {
+    if(post) {
       functioncalled = false
       if(!isSmallScreen) {
         clearTimeout(timeOut)
         timeOut = null;
         timeOut = setTimeout(() => {
-          const videotag = document.getElementById('myVideo-container');
+          const videotag = document.getElementById('myVideo')
           videotag.addEventListener("wheel", (event) => {
             if (event.deltaY < 0) {
               if (_videoIdIndex) {
@@ -91,7 +91,8 @@ const DetailFeed = () => {
         }, 500);
       } else {
         // Attach the touch event handlers to your element
-        const myElement = document.getElementById('myVideo-container');
+        const myElement = document.getElementById('myVideo');
+        console.log('myElement: ', myElement);
         if(myElement) {
           myElement.addEventListener('touchstart', handleTouchStart);
           myElement.addEventListener('touchend', handleTouchEnd);
@@ -133,10 +134,9 @@ const DetailFeed = () => {
         }
       }
     }
-  }, [post])
+  })
 
 
-console.log({videoIdIndex})
   if (!post) return <div></div>
 
   return (

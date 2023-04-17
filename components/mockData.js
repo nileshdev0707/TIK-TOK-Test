@@ -17,7 +17,7 @@ export const postList = [
       company:'nileshdev0707@gmail.com',
       image:'https://firebasestorage.googleapis.com/v0/b/one-click-75771.appspot.com/o/posts%2FGcaAwLzKUkwWRgZIy5JG%2Fimage?alt=media&token=53fe9ab2-4be5-474c-b294-5825e903f44d',
       profileImage:'https://lh5.googleusercontent.com/-nvsAZ5Vtafk/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuckaxCXawWng-jEZY66mABkr36cB1Q/s96-c/photo.jpg',
-      productImage:'https://firebasestorage.googleapis.com/v0/b/one-click-75771.appspot.com/o/posts%2FGcaAwLzKUkwWRgZIy5JG%2Fimage?alt=media&token=53fe9ab2-4be5-474c-b294-5825e903f44d',
+      productImage:'https://res.cloudinary.com/drqknzm5v/image/upload/v1680243226/cld-sample-4.jpg',
       songName:'asindl sdsid',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
