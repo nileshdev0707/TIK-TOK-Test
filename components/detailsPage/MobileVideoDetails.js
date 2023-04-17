@@ -96,15 +96,15 @@ const MobileVideoDetails = ({profileImage,company,productImage,username,videoRef
               }}
             >
               <video
+                preload='metadata'
                 ref={videoRef}
-                playsinline
-                onClick={onVideoClick}
                 loop
+                autoPlay
+                muted
+                playsInline
+                onClick={onVideoClick}
                 id="myVideo"
                 src={video}
-                autoPlay={true}
-                muted={true}
-                preload={true}
                 className="h-full cursor-pointer"
                 onLoadStart={() => {
                   setIsLoadVideo(true);
@@ -112,11 +112,12 @@ const MobileVideoDetails = ({profileImage,company,productImage,username,videoRef
                 onLoadedData={() => {
                   setIsLoadVideo(false);
                 }}
+                onPlaying={() => { setIsLoadVideo(false) }}
               ></video>
               <img
                 src={productImage}
                 id="myImage"
-                className="absolute h-full left-0 top-0 w-full"
+                className="absolute h-full left-0 top-0 w-full z-10"
                 style={{ display: "none" }}
               />
             </Card.Body>
@@ -124,7 +125,7 @@ const MobileVideoDetails = ({profileImage,company,productImage,username,videoRef
               css={{
                 position: "absolute",
                 bottom: 0,
-                zIndex: 1,
+                zIndex: 99,
               }}>
               <Grid.Container>
                 <Grid xs={12}>
