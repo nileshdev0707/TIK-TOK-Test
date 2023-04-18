@@ -171,6 +171,10 @@ const DetailFeed = () => {
         postList={postList}
         touchstart={handleTouchStart}
         touchend={handleTouchEnd}
+        productPrice={post.price}
+        productDescription={post.description}
+        productName={post.productName}
+        isAvailable={post.isAvailable}
       />
     </div>
   );

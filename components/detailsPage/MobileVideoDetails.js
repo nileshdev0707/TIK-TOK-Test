@@ -3,7 +3,7 @@ import { Card, Grid } from "@nextui-org/react";
 
 import { GoVerified } from "react-icons/go";
 import { BsCart4 } from "react-icons/bs";
-import { IoIosShareAlt, IoIosSend } from "react-icons/io";
+import { IoIosShareAlt, IoIosSend,IoIosClose } from "react-icons/io";
 import { motion } from "framer-motion";
 import { faker } from "@faker-js/faker";
 import randomWords from "random-words";
@@ -26,6 +26,10 @@ const MobileVideoDetails = ({
   setComment,
   touchstart,
   touchend,
+  productPrice,
+  productDescription,
+  productName,
+  isAvailable
 }) => {
   const [videoComment, setVideoComment] = useState([]);
 
@@ -56,6 +60,7 @@ const MobileVideoDetails = ({
   }, [comments]);
 
   return (
+    <>
     <Card
       css={{
         height: "100vh",
@@ -156,7 +161,7 @@ const MobileVideoDetails = ({
         }}
       >
         <Grid.Container>
-          <Grid xs={12}>
+          <Grid xs={12} css={{marginBottom:14}}>
             {videoComment.length > 0 && (
               <div className="h-60 overflow-y-scroll scrollbar-thin scrollbar-hide">
                 {videoComment.map((comment, index) => (
@@ -188,21 +193,34 @@ const MobileVideoDetails = ({
               gap: 5,
             }}
           >
-            <button
-              className="flex p-2 text-white rounded-xl"
-              style={{ background: "#db2323" }}
-            >
-              <BsCart4 className="text-[36px] " />
-            </button>
-            <input
+            {isAvailable ? 
+            (
+              <p style={{background:'white',padding:12,borderRadius:10}}>This item is in our store, please come to shop it.</p>
+            ):(
+              <>
+              <button
+                className="flex p-2 text-white rounded-xl"
+                style={{ background: "#db2323" }}
+                data-bs-toggle="offcanvas" 
+                data-bs-target="#demo"
+              >
+                <BsCart4 className="text-[36px] " />
+              </button>
+                <p className="product-description">
+                  {productDescription}
+                </p>
+              </>
+            )
+            }
+            {/* <input
               type="text"
               value={comment}
               style={{ padding: 14, width: 160 }}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Say something.."
               className="border-none flex-1 focus:ring-0 outline-none rounded-xl bg-gray-300"
-            />
-            <div
+            /> */}
+            {/* <div
               style={{
                 display: "flex",
                 flexFlow: "row",
@@ -248,11 +266,42 @@ const MobileVideoDetails = ({
                 </motion.div>
               )}
               <IoIosShareAlt className="text-black text-[30px]" />
-            </div>
+            </div> */}
           </Grid>
         </Grid.Container>
       </Card.Footer>
     </Card>
+
+        <div class="offcanvas offcanvas-bottom h-75" id="demo">
+          <div class="offcanvas-header">
+            <h1 class="offcanvas-title"/>
+            <button type="button" data-bs-dismiss="offcanvas">
+                <IoIosClose
+                className="text-black text-[30px]"
+              />
+            </button>
+          </div>
+          <div class="offcanvas-body">
+            <img
+                src={productImage}
+                style={{ height:200,width:'auto',margin:'auto',borderRadius:15}}
+            />
+            <div style={{padding:5}}>
+              <p style={{color:'gray',fontSize:25,fontWeight:'600'}}>{productName}</p>
+              <p style={{fontWeight:'500'}}>{productPrice}</p>
+            <h1 style={{fontWeight:'800',color:'dimgray'}}>Description</h1>
+              <p>{productDescription}</p>
+            </div>
+            <button
+              className="flex p-2 pl-10 pr-10 rounded-full text-white"
+              style={{ background: "#db2323",margin:'auto' }}
+            >
+              Buy Now
+              <BsCart4 className="ml-2 text-[18px] " />
+            </button>
+          </div>
+        </div>
+    </>
   );
 };
 

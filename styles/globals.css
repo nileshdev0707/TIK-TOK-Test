@@ -634,3 +634,14 @@ video::-webkit-media-controls-time-remaining-display {
   white-space: nowrap;
   color: #c8ffff;
 }
+@media(min-width:1024px){
+  .info-container{
+    width:380px !important;
+  }
+}
+.product-description{
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

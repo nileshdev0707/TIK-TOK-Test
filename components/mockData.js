@@ -9,7 +9,11 @@ export const postList = [
       songName:'dance!MUV',
       topic:'food',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'200$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'shoes',
+      isAvailable:false,
     },
     {
       id:'v7lQczJiRA5zthk8rAUz',
@@ -21,7 +25,11 @@ export const postList = [
       songName:'asindl sdsid',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'1200$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'Nike shoes',
+      isAvailable:false,
     },
     {
       id:'oDOkd4hCm8rogMGuz0oX',
@@ -33,7 +41,11 @@ export const postList = [
       songName:'nil ad sdjakjs asas',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'400$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'Bata shoes',
+      isAvailable:true,
     },
     {
       id:'Knzbrmbj5U5bMml3NT1g',
@@ -45,7 +57,11 @@ export const postList = [
       songName:'test-test',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'910$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'Mens shoes',
+      isAvailable:false,
     },
     {
       id:'GcaAwLzKUkwWRgZIy5JG',
@@ -57,7 +73,11 @@ export const postList = [
       songName:'asindl sdsid',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'2600$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'canvas shoes',
+      isAvailable:false,
     }, {
       id:'ivm1NUZaS06ZXoGCiTgl',
       caption:'dasd adsa',
@@ -68,7 +88,11 @@ export const postList = [
       songName:'sdsa adsalaslo22 2osdsd sdsds',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'20$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'sports shoes',
+      isAvailable:false,
     }, {
       id:'Ky2IylFti9i7aECgoc3L',
       caption:'test-test',
@@ -79,6 +103,10 @@ export const postList = [
       songName:'test',
       topic:'development',
       userId:'WmEoLWOsxmTFjDipMxCMxW7ft5f1',
-      username:'nilesh dev'
+      username:'nilesh dev',
+      price:'770$',
+      description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      productName:'Runner-up shoes',
+      isAvailable:true,
     }
 ]

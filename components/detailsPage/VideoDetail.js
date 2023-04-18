@@ -147,7 +147,11 @@ const VideoDetail = ({
   videoIdIndex,
   postList,
   touchstart,
-  touchend
+  touchend,
+  productDescription,
+  productPrice,
+  productName,
+  isAvailable
 }) => {
   const [user] = useAuthState(auth);
   const router = useRouter();
@@ -428,7 +432,7 @@ const VideoDetail = ({
               )}
             </div>
           </div>
-          <div className="relative w-[1000px] md:w-[900px] lg:w-[700px]">
+          <div className="relative w-[1000px] md:w-[900px] lg:w-[700px] info-container">
             <div className="lg:mt-20 mt-10">
               <>
                 <div
@@ -783,6 +787,10 @@ const VideoDetail = ({
           setComment={setComment}
           touchstart={touchstart}
           touchend={touchend}
+          productDescription={productDescription}
+          productPrice={productPrice}
+          productName={productName}
+          isAvailable={isAvailable}
         />
       )}
     </>
