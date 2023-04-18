@@ -12,6 +12,7 @@ let functioncalled = true
 let _videoIdIndex = 0
 // let postList = []
 let timeOut;
+let startY = null;
 const DetailFeed = () => {
   const router = useRouter();
   const { videoId } = router.query;
@@ -65,6 +66,40 @@ const DetailFeed = () => {
     setPost(postList[videoIdIndex])
   }, [videoIdIndex])
 
+  const handleTouchStart = (event) => {
+    // Store the initial touch position
+    const touch = event.touches[0];
+    startY = touch.clientY;
+  }
+
+  const handleTouchEnd = (event) => {
+    if (startY !== null) {
+      // Calculate the distance between the initial and final touch positions
+      const touch = event.changedTouches[0];
+      const deltaY = touch.clientY - startY;
+
+      if (deltaY > 0) {
+        // User swiped downward
+        console.log('Downward swipe detected!');
+
+        if (_videoIdIndex !== postList?.length - 1) {
+          _videoIdIndex = _videoIdIndex + 1
+        } else {
+          _videoIdIndex = 1
+        }
+      } else if (deltaY < 0) {
+        // User swiped upward
+        console.log('Upward swipe detected!');
+        if (_videoIdIndex) {
+          _videoIdIndex = _videoIdIndex - 1
+        }
+      }
+      setVideoIdIndex(_videoIdIndex)
+      // Reset the initial touch position
+      startY = null;
+    }
+  }
+
   useEffect(() => {
     if(post) {
       functioncalled = false
@@ -92,49 +127,14 @@ const DetailFeed = () => {
       } else {
         // Attach the touch event handlers to your element
         const myElement = document.getElementById('myVideo');
-        console.log('myElement: ', myElement);
         if(myElement) {
           myElement.addEventListener('touchstart', handleTouchStart);
           myElement.addEventListener('touchend', handleTouchEnd);
-          let startY = null;
-
-          function handleTouchStart(event) {
-            // Store the initial touch position
-            const touch = event.touches[0];
-            startY = touch.clientY;
-          }
-
-          function handleTouchEnd(event) {
-            if (startY !== null) {
-              // Calculate the distance between the initial and final touch positions
-              const touch = event.changedTouches[0];
-              const deltaY = touch.clientY - startY;
-
-              if (deltaY > 0) {
-                // User swiped downward
-                console.log('Downward swipe detected!');
-
-                if (_videoIdIndex !== postList?.length - 1) {
-                  _videoIdIndex = _videoIdIndex + 1
-                } else {
-                  _videoIdIndex = 1
-                }
-              } else if (deltaY < 0) {
-                // User swiped upward
-                console.log('Upward swipe detected!');
-                if (_videoIdIndex) {
-                  _videoIdIndex = _videoIdIndex - 1
-                }
-              }
-              setVideoIdIndex(_videoIdIndex)
-              // Reset the initial touch position
-              startY = null;
-            }
-          }
         }
       }
     }
   })
+
 
 
   if (!post) return <div></div>
@@ -169,6 +169,8 @@ const DetailFeed = () => {
         setVideoIdIndex={setVideoIdIndex}
         videoIdIndex={videoIdIndex}
         postList={postList}
+        touchstart={handleTouchStart}
+        touchend={handleTouchEnd}
       />
     </div>
   );

@@ -146,6 +146,8 @@ const VideoDetail = ({
   setVideoIdIndex,
   videoIdIndex,
   postList,
+  touchstart,
+  touchend
 }) => {
   const [user] = useAuthState(auth);
   const router = useRouter();
@@ -372,13 +374,15 @@ const VideoDetail = ({
                 className={`lg:h-[100vh] h-[60vh] ${isLoadVideo && "video"} `}
               >
                 <video
+                  preload="metadata"
                   ref={videoRef}
-                  onClick={onVideoClick}
                   loop
+                  autoPlay
+                  muted
+                  playsInline
+                  onClick={onVideoClick}
                   id="myVideo"
                   src={video}
-                  autoPlay={true}
-                  muted={true}
                   className="h-full cursor-pointer"
                   onLoadStart={() => {
                     setIsLoadVideo(true);
@@ -386,7 +390,6 @@ const VideoDetail = ({
                   onLoadedData={() => {
                     setIsLoadVideo(false);
                   }}
-                  playsinline
                 ></video>
                 <img
                   src={productImage}
@@ -778,6 +781,8 @@ const VideoDetail = ({
           setIsLoadVideo={setIsLoadVideo}
           comments={comments}
           setComment={setComment}
+          touchstart={touchstart}
+          touchend={touchend}
         />
       )}
     </>
