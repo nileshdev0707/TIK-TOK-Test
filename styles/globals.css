@@ -620,15 +620,17 @@ video::-webkit-media-controls-time-remaining-display {
   width: 0px;
 }
 .commet-box{
-  background: white;
+  background: rgb(53 52 52 / 27%);
   padding: 10px;
   opacity: 0.8;
   font-weight: 500;
   border-radius: 8px;
   width: 260px;
+  margin-bottom: 5px;
 }
 .user-comment{
   overflow:hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #c8ffff;
 }
