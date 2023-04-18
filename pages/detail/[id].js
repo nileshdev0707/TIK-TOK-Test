@@ -1,8 +1,8 @@
 import Head from "next/head";
 import React from "react";
 
-import Header from "../../components/Header";
 import DetailFeed from "../../components/detailsPage/DetailFeed";
+import Script from 'next/script'
 
 const DetailsPage = () => {
   return (
@@ -15,8 +15,8 @@ const DetailsPage = () => {
           href="https://th.bing.com/th/id/R.67bc88bb600a54112e8a669a30121273?rik=vsc22vMfmcSGfg&pid=ImgRaw&r=0"
         />
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
       </Head>
+          <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" async/>
       {/*  <Header isShow={true} /> */}
       <DetailFeed />
     </div>
