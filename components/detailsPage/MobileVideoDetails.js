@@ -163,14 +163,14 @@ const MobileVideoDetails = ({
                   <div
                     key={index}
                     className="flex items-center
-            space-x-2 mb-3"
+            space-x-2 mb-3 commet-box"
                   >
                     <img
                       className="h-7 rounded-full"
                       src={comment.userImage}
                       alt=""
                     />
-                    <p className="text-sm flex-1">
+                    <p className="text-sm flex-1 user-comment">
                       <span className="font-bold">{comment.userName} </span>
                       {comment.comment}
                     </p>

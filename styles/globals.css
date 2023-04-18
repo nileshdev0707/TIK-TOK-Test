@@ -619,3 +619,16 @@ video::-webkit-media-controls-time-remaining-display {
 .videos::-webkit-scrollbar {
   width: 0px;
 }
+.commet-box{
+  background: white;
+  padding: 10px;
+  opacity: 0.8;
+  font-weight: 500;
+  border-radius: 8px;
+  width: 260px;
+}
+.user-comment{
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
