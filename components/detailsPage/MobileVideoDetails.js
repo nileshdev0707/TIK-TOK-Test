@@ -156,7 +156,7 @@ const MobileVideoDetails = ({
       <Card.Footer
         css={{
           position: "absolute",
-          bottom: 0,
+          bottom: 80,
           zIndex: 99,
         }}
       >
@@ -168,7 +168,7 @@ const MobileVideoDetails = ({
                   <div
                     key={index}
                     className="flex items-center
-            space-x-2 mb-3 commet-box"
+            space-x-2 mb-1 commet-box"
                   >
                     <img
                       className="h-7 rounded-full"
