@@ -748,7 +748,7 @@ const VideoDetail = ({
                     className="flex p-2 pl-10 pr-10 rounded-full text-white"
                     style={{ background: "#db2323" }}
                   >
-                    Buy Now
+                    Köp nu
                     <BsCart4 className="ml-2 text-[18px] " />
                   </button>
                 </div>

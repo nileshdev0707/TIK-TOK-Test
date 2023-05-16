@@ -9,6 +9,27 @@ import { faker } from "@faker-js/faker";
 import randomWords from "random-words";
 
 let comment_video = [];
+let all_comment = [
+  {name: 'Johanna32' , cmp : "Lämnade in H&M kjol S säljs nu i Sergel för 399 kr",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg"},
+  {name:  "Louise", cmp: "399 kr mer till Louise för försäljning av Acne Tröja",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1684205721/Avatar-PNG-Photo_nogqmi.png"},
+  {name: "Cirklara", cmp: " Sålde 10 plagg på en vecka! Grattis!",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1684205721/Avatar-PNG-Photo_nogqmi.png"},
+  {name: "Jessica", cmp : " Köpte Tiger of Sweden kavaj av Johanna32",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1684205721/Avatar-PNG-Photo_nogqmi.png"},
+  {name: "Sergel butiken", cmp : "  Den senaste timmen har det lämnats in 29 plagg",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg"},
+  {name: "Ida_31", cmp : "  Lämnade in Acne Tröja",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg"},
+  {name: "Ida_31", cmp : "  Lämnade in Acne Kavaj",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg"},
+  {name: "Ida_31", cmp : "  Sålde Acne Tröja och fick 299 i kommission",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg"},
+];
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 const MobileVideoDetails = ({
   profileImage,
   company,
@@ -38,10 +59,9 @@ const MobileVideoDetails = ({
     let allComments = [];
     comments.map((comment) => {
       let singleComment = {
-        userImage:
-          "https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg",
-        comment: comment.data().comment,
-        userName: comment.data().username,
+        userImage: all_comment[0].userImage,
+        comment: all_comment[0].cmp,
+        userName: all_comment[0].name,
       };
       comment_video.push(singleComment);
       allComments.push(singleComment);
@@ -49,10 +69,11 @@ const MobileVideoDetails = ({
     setVideoComment(allComments);
 
     setInterval(() => {
+      const rndInt = randomIntFromInterval(1, 7)
       let newComment = {
-        userImage: faker.image.avatar(),
-        comment: randomWords({ exactly: 3, join: " " }),
-        userName: faker.internet.userName(),
+        userImage: all_comment[rndInt].userImage,
+        comment: all_comment[rndInt].cmp,
+        userName: all_comment[rndInt].name,
       };
       comment_video.push(newComment);
       setVideoComment(comment_video);
@@ -195,7 +216,7 @@ const MobileVideoDetails = ({
           >
             {isAvailable ? 
             (
-              <p style={{background:'white',padding:12,borderRadius:10}}>This item is in our store, please come to shop it.</p>
+              <p style={{background:'white',padding:12,borderRadius:10}}>Köp i butik på Sergel</p>
             ):(
               <>
               <button
@@ -296,7 +317,7 @@ const MobileVideoDetails = ({
               className="flex p-2 pl-10 pr-10 rounded-full text-white"
               style={{ background: "#db2323",margin:'auto' }}
             >
-              Buy Now
+              Köp nu
               <BsCart4 className="ml-2 text-[18px] " />
             </button>
           </div>
