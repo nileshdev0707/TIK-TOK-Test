@@ -318,8 +318,8 @@ const VideoDetail = ({
           images.style.display = "block";
           setIsPlaying(false);
           setTimeout(() => {
-            images.style.display = "none";
             onVideoClick();
+            images.style.display = "none";
           }, 5000);
         };
       }
@@ -380,10 +380,10 @@ const VideoDetail = ({
                 <video
                   preload="metadata"
                   ref={videoRef}
-                  loop
-                  autoPlay
+                  loop={isPlaying}
+                  autoPlay={isPlaying}
                   muted
-                  playsInline
+                  playsInline={isPlaying}
                   onClick={onVideoClick}
                   id="myVideo"
                   src={video}
