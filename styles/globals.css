@@ -629,9 +629,9 @@ video::-webkit-media-controls-time-remaining-display {
   margin-bottom: 5px;
 }
 .user-comment{
-  overflow:hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /*overflow:hidden;*/
+  /*text-overflow: ellipsis;*/
+  /*white-space: nowrap;*/
   color: #c8ffff;
 }
 @media(min-width:1024px){

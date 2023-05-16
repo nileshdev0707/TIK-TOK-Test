@@ -3,6 +3,27 @@ import moment from "moment";
 import randomWords from "random-words";
 import { faker } from "@faker-js/faker";
 let comment_video = [];
+let all_comment = [
+  {name: 'Johanna32' , cmp : "Lämnade in H&M kjol S säljs nu i Sergel för 399 kr",
+    userImage: faker.image.avatar()},
+  {name:  "Louise", cmp: "399 kr mer till Louise för försäljning av Acne Tröja",
+    userImage: faker.image.avatar()},
+  {name: "Cirklara", cmp: " Sålde 10 plagg på en vecka! Grattis!",
+    userImage: faker.image.avatar()},
+  {name: "Jessica", cmp : " Köpte Tiger of Sweden kavaj av Johanna32",
+    userImage: "https://res.cloudinary.com/drqknzm5v/image/upload/v1684205721/Avatar-PNG-Photo_nogqmi.png"},
+  {name: "Sergel butiken", cmp : "  Den senaste timmen har det lämnats in 29 plagg",
+    userImage: faker.image.avatar()},
+  {name: "Ida_31", cmp : "  Lämnade in Acne Tröja",
+    userImage: faker.image.avatar()},
+  {name: "Ida_31", cmp : "  Lämnade in Acne Kavaj",
+    userImage: faker.image.avatar()},
+  {name: "Ida_31", cmp : "  Sålde Acne Tröja och fick 299 i kommission",
+    userImage: faker.image.avatar()},
+];
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 const Comments = ({
   comment,
   setComment,
@@ -21,21 +42,22 @@ const [videoComment,setVideoComment] = useState([]);
     let allComments=[];
     comments.map((comment) => {
       let singleComment = {
-        userImage:'https://res.cloudinary.com/drqknzm5v/image/upload/v1681305949/photo-1633332755192-727a05c4013d_vlxyuo.jpg',
-        comment:comment.data().comment,
-        userName:comment.data().username,
-      }
+        userImage: all_comment[0].userImage,
+        comment: all_comment[0].cmp,
+        userName: all_comment[0].name,
+      };
       comment_video.push(singleComment)
       allComments.push(singleComment);
     })
     setVideoComment(allComments);  
 
     setInterval(()=>{
-      let newComment ={ 
-        userImage:faker.image.avatar(),
-        comment:randomWords({ exactly: 3, join: ' ' }),
-        userName: faker.internet.userName(),
-      }
+      const rndInt = randomIntFromInterval(1, 7)
+      let newComment = {
+        userImage: all_comment[rndInt].userImage,
+        comment: all_comment[rndInt].cmp,
+        userName: all_comment[rndInt].name,
+      };
       comment_video.push(newComment);
       setVideoComment(comment_video);
     },3000)
