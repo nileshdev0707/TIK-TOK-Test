@@ -367,7 +367,7 @@ const VideoDetail = ({
           className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap"
         >
           <Toaster />
-          <div className="overflow-hidden relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center bg-gradient-to-r from-gray-900 to-gray-700">
+          <div className="overflow-hidden relative flex-2 w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center bg-gradient-to-r from-gray-900 to-gray-700 main-video-container">
             <div className="opacity-90 absolute top-6 left-2 lg:left-6 flex gap-6 z-50">
               <p className="cursor-pointer " onClick={() => router.back()}>
                 <MdOutlineCancel className="text-white text-[35px] hover:opacity-90" />

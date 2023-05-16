@@ -645,3 +645,8 @@ video::-webkit-media-controls-time-remaining-display {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+@media(max-width:1520px) and (min-width:1024px){
+  .main-video-container{
+    width:60% !important;
+  }
+}
