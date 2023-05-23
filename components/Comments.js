@@ -38,7 +38,6 @@ const [videoComment,setVideoComment] = useState([]);
   useEffect(()=>{
 
     comment_video = []
-    console.log(comments,'comments--->>')
     let allComments=[];
     comments.map((comment) => {
       let singleComment = {

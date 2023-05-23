@@ -7,7 +7,6 @@ import VideoDetail from "./VideoDetail";
 import { postList } from '../mockData';
 import {useMediaQuery} from "../../hooks/useMediaQuery";
 
-console.log(postList,'postList')
 let functioncalled = true
 let _videoIdIndex = 0
 // let postList = []
@@ -54,7 +53,6 @@ const DetailFeed = () => {
 
 
   useEffect(()=>{
-    console.log(videoId,'videoId', postList.length)
     if(videoId && postList.length) {
       const pendingVideo = postList?.findIndex((postItem) => postItem?.id === videoId);
       setVideoIdIndex(pendingVideo);

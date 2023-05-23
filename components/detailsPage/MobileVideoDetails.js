@@ -50,7 +50,8 @@ const MobileVideoDetails = ({
   productPrice,
   productDescription,
   productName,
-  isAvailable
+  isAvailable,
+  isPlaying
 }) => {
   const [videoComment, setVideoComment] = useState([]);
 
@@ -84,7 +85,9 @@ const MobileVideoDetails = ({
     <>
     <Card
       css={{
-        height: "100vh",
+        height: "100%",
+        width:'100%',
+        borderRadius:'unset',
         border: "none",
         background:
           "linear-gradient(180deg, transparent, #303c4f, transparent)",
@@ -144,15 +147,17 @@ const MobileVideoDetails = ({
         css={{
           borderRadius: 0,
           p: "0px",
+          height:'100vh',
+          width:'100vw'
         }}
       >
         <video
           preload="metadata"
           ref={videoRef}
-          loop
-          autoPlay
+          loop={isPlaying}
+          autoPlay={isPlaying}
           muted
-          playsInline
+          playsInline={isPlaying}
           onClick={onVideoClick}
           id="myVideo"
           src={video}

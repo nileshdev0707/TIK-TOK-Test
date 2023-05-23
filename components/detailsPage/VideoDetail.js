@@ -791,6 +791,7 @@ const VideoDetail = ({
           productPrice={productPrice}
           productName={productName}
           isAvailable={isAvailable}
+          isPlaying={isPlaying}
         />
       )}
     </>
