@@ -90,7 +90,7 @@ const MobileVideoDetails = ({
         borderRadius:'unset',
         border: "none",
         background:
-          "linear-gradient(180deg, transparent, #303c4f, transparent)",
+          "linear-gradient(to right, #111827, #374151)",
       }}
       id="myVideo-container"
       onTouchStart={touchstart}
