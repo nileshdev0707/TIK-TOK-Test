@@ -154,7 +154,7 @@ const DetailFeed = () => {
         // productImage={post.data().productImage}
         caption={post.caption}
         company={post.company}
-        video={post.image}
+        videos={post.video}
         profileImage={post.profileImage}
         topic={post.topic}
         timestamp={post.timestamp}

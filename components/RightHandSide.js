@@ -55,7 +55,7 @@ const RightHandSide = () => {
               key={post.id}
               caption={post.caption}
               company={post.company}
-              video={post.image}
+              video={post.video[0]}
               profileImage={post.profileImage}
               topic={post.topic}
               timestamp={post.timestamp}

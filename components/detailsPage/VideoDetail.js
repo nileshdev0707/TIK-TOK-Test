@@ -133,7 +133,7 @@ const userProfiles = [
 const VideoDetail = ({
   caption,
   company,
-  video,
+  videos,
   profileImage,
   topic,
   timestamp,
@@ -170,6 +170,10 @@ const VideoDetail = ({
   const [isLoadVideo, setIsLoadVideo] = useState(true);
 
   const [userComments, setUserComments] = useState([]);
+
+  const [activeVideoIndex,setActiveVideoIndex] = useState(0);
+  const [activeImageIndex,setActiveImageIndex] = useState(0);
+  const [IsImageShow,setIsImageShow] = useState(false);
 
   const videoRef = useRef(null);
   const isSmallScreen = useMediaQuery(600);
@@ -287,42 +291,71 @@ const VideoDetail = ({
   }, [topic]);
 
   useEffect(() => {
-    if (video.includes("firebasestorage.googleapis.com")) {
+    if (videos.includes("firebasestorage.googleapis.com")) {
       const chekerUrl = video.replace(
         "firebasestorage.googleapis.com",
         "tiktokClone.com"
       );
       setVideoLink(chekerUrl);
-    } else if (video.includes("drive.google.com")) {
-      const chekerUrl = video.replace("drive.google.com", "tiktokClone.com");
+    } else if (videos.includes("drive.google.com")) {
+      const chekerUrl = videos.replace("drive.google.com", "tiktokClone.com");
       setVideoLink(chekerUrl);
-    } else if (video.includes("mega.nz/embed")) {
-      const chekerUrl = video.replace("mega.nz/embed", "tiktokClone.com");
+    } else if (videos.includes("mega.nz/embed")) {
+      const chekerUrl = videos.replace("mega.nz/embed", "tiktokClone.com");
       setVideoLink(chekerUrl);
     }
-  }, [video]);
+  }, [videos]);
 
-      let video1 = document.getElementById("myVideo");
-      let images = document.querySelector("#myImage");
+      let videoEle = document.getElementById("myVideo");
+      let imageEle = document.querySelector("#myImage");
 
-      video1?.addEventListener("timeupdate", function () {
-        if (video1.duration - video1.currentTime < 1) {
+      videoEle?.addEventListener("timeupdate", function () {
+        if (videoEle.duration - videoEle.currentTime < 1) {
           // 1 second threshold
-          video1.onend();
+          videoEle.onend();
         }
       });
 
-      if (video1) {
-        video1.onend = function () {
-          // Your code to handle the end of the video goes here
-          images.style.display = "block";
-          setIsPlaying(false);
-          setTimeout(() => {
-            onVideoClick();
-            images.style.display = "none";
-          }, 5000);
+      if (videoEle) {
+        videoEle.onend = function () {
+          if(activeVideoIndex < videos.length - 1){
+            let activeVideo = 0;
+            activeVideo = (++activeVideo) % videos.length;
+            videoEle.src = videos[activeVideo]
+            setActiveVideoIndex(activeVideo)
+          }else{
+            imageEle.style.display = "block";
+            setIsPlaying(false);
+            setIsImageShow(true);
+          }
         };
       }
+
+      useEffect(()=> {
+        let interval = '';
+        if(IsImageShow){
+          interval = setInterval(() => {
+            if(imageEle){
+              let activeImage = 0;
+              if(activeImageIndex < productImage.length - 1){
+                  activeImage = (++activeImage) % productImage.length;
+                  imageEle.src = productImage[activeImage]
+                  setActiveImageIndex(activeImage)
+              }else {
+                setActiveVideoIndex(0)
+                setActiveImageIndex(0);
+                onVideoClick();
+                setIsImageShow(false);
+                imageEle.style.display = "none";
+              } 
+            }
+          }, 5000)
+
+          return () => {
+            clearInterval(interval)
+          }
+        }
+      },[IsImageShow,activeImageIndex])
 
   // This is the function we wrote earlier
   async function copyTextToClipboard(text) {
@@ -336,7 +369,7 @@ const VideoDetail = ({
   // onClick handler function for the copy button
   const handleCopyClick = () => {
     // Asynchronously call copyTextToClipboard
-    copyTextToClipboard(video)
+    copyTextToClipboard(video[activeVideoIndex])
       .then(() => {
         // If successful, update the isCopied state value
         setIsCopied(true);
@@ -386,7 +419,7 @@ const VideoDetail = ({
                   playsInline={isPlaying}
                   onClick={onVideoClick}
                   id="myVideo"
-                  src={video}
+                  src={videos[activeVideoIndex]}
                   className="h-full cursor-pointer"
                   onLoadStart={() => {
                     setIsLoadVideo(true);
@@ -394,9 +427,9 @@ const VideoDetail = ({
                   onLoadedData={() => {
                     setIsLoadVideo(false);
                   }}
-                ></video>
+                />
                 <img
-                  src={productImage}
+                  src={productImage[activeImageIndex]}
                   id="myImage"
                   className="absolute h-full left-0 top-0 w-full z-10"
                   style={{ display: "none" }}
@@ -724,7 +757,7 @@ const VideoDetail = ({
                     <input
                       type="text"
                       readOnly
-                      value={videoLink ? videoLink : video}
+                      value={videoLink ? videoLink : videos[activeVideoIndex]}
                       className="w-full bg-transparent outline-none cursor-pointer text-gray-500 text-sm"
                     />
                     {isCopied ? (
@@ -773,12 +806,12 @@ const VideoDetail = ({
         <MobileVideoDetails
           profileImage={profileImage}
           company={company}
-          productImage={productImage}
+          productImage={productImage[activeImageIndex]}
           username={username}
           videoRef={videoRef}
           onVideoClick={onVideoClick}
           sendComment={sendComment}
-          video={video}
+          video={videos[activeVideoIndex]}
           likePost={likePost}
           comment={comment}
           hasLikes={hasLikes}
